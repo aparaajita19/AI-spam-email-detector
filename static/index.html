@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Spam Email Detector | Intelligent Email Security</title>
+    <meta name="description" content="State-of-the-art AI-powered spam and phishing email detector powered by Machine Learning and TF-IDF NLP processing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Background glowing ambient orbs -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="navbar">
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">SpamShield<span class="gradient-text">.AI</span></span>
+                    <span class="logo-subtitle">Intelligent Email Classification</span>
+                </div>
+            </div>
+            
+            <div class="nav-status">
+                <div class="status-indicator" id="system-status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text" id="system-status-text">Connecting to ML Engine...</span>
+                </div>
+                <div class="model-badge">
+                    <span class="badge-tag">Model</span>
+                    <span class="badge-val">Multinomial NB + TF-IDF</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            <!-- Hero Title -->
+            <section class="hero-section">
+                <div class="hero-badge">
+                    <span class="sparkle">✨</span> Real-Time NLP Email Protection
+                </div>
+                <h1 class="hero-title">Protect Your Inbox with <span class="gradient-text">AI Precision</span></h1>
+                <p class="hero-desc">Analyze email headers and message body instantly. Our trained machine learning model inspects linguistic patterns, keyword weights, and phishing signals in milliseconds.</p>
+            </section>
+
+            <!-- Detector Grid -->
+            <div class="workspace-grid">
+                <!-- Left Column: Input Console -->
+                <div class="card input-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <span>Email Content</span>
+                        </div>
+                        <div class="card-actions">
+                            <button type="button" class="btn-ghost btn-sm" id="btn-paste" title="Paste clipboard text">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                </svg>
+                                Paste
+                            </button>
+                            <button type="button" class="btn-ghost btn-sm" id="btn-clear" title="Clear text">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Preset Samples Chips -->
+                    <div class="presets-container">
+                        <span class="presets-label">Quick Samples:</span>
+                        <div class="presets-scroll" id="presets-container">
+                            <button type="button" class="preset-chip chip-spam" data-sample="lottery">
+                                🎁 Amazon Gift Card Scam
+                            </button>
+                            <button type="button" class="preset-chip chip-spam" data-sample="bank">
+                                🚨 Urgent Account Verification
+                            </button>
+                            <button type="button" class="preset-chip chip-spam" data-sample="crypto">
+                                💰 Crypto Prize Winner
+                            </button>
+                            <button type="button" class="preset-chip chip-ham" data-sample="work">
+                                💼 Project Status Report
+                            </button>
+                            <button type="button" class="preset-chip chip-ham" data-sample="meeting">
+                                📅 Team Sync Meeting
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="email-input" 
+                            class="email-textarea" 
+                            placeholder="Paste or type raw email text, subject line, or message body here..."
+                            rows="8"
+                            spellcheck="false"
+                        ></textarea>
+                    </div>
+
+                    <!-- Text Stats Bar -->
+                    <div class="input-footer">
+                        <div class="stats-counters">
+                            <span class="counter-item"><strong id="stat-words">0</strong> words</span>
+                            <span class="counter-divider">•</span>
+                            <span class="counter-item"><strong id="stat-chars">0</strong> characters</span>
+                        </div>
+                        <button type="button" class="btn-primary" id="btn-analyze">
+                            <span class="btn-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                                </svg>
+                            </span>
+                            <span class="btn-text">Analyze Email</span>
+                            <span class="btn-shortcut">⌘↵</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Results & Diagnosis -->
+                <div class="card result-card" id="result-container">
+                    <!-- Idle State Placeholder -->
+                    <div class="result-placeholder" id="state-idle">
+                        <div class="radar-pulse">
+                            <div class="radar-circle circle-1"></div>
+                            <div class="radar-circle circle-2"></div>
+                            <div class="radar-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="placeholder-title">Awaiting Email Content</h3>
+                        <p class="placeholder-text">Type or paste an email on the left, or click one of the quick sample presets to run the AI security scanner.</p>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div class="result-loading hidden" id="state-loading">
+                        <div class="scanner-laser"></div>
+                        <div class="spinner-ring"></div>
+                        <p class="loading-text">Analyzing Linguistic & TF-IDF Vectors...</p>
+                    </div>
+
+                    <!-- Active Result State -->
+                    <div class="result-active hidden" id="state-active">
+                        <!-- Verdict Header -->
+                        <div class="verdict-banner" id="verdict-banner">
+                            <div class="verdict-icon-wrap" id="verdict-icon">
+                                <!-- SVG injected via JS -->
+                            </div>
+                            <div class="verdict-details">
+                                <div class="verdict-badge" id="verdict-badge">SPAM DETECTED</div>
+                                <div class="verdict-summary" id="verdict-summary">High risk phishing or promotional content</div>
+                            </div>
+                            <div class="verdict-score-box">
+                                <span class="score-label">Confidence</span>
+                                <span class="score-value" id="score-confidence">96.8%</span>
+                            </div>
+                        </div>
+
+                        <!-- Probability Meters -->
+                        <div class="prob-section">
+                            <div class="prob-header">
+                                <span class="prob-title">Probability Breakdown</span>
+                                <span class="prob-status-tag" id="prob-dominant-tag">96.8% Spam Probability</span>
+                            </div>
+                            <div class="multi-progress-bar">
+                                <div class="bar-fill bar-spam" id="bar-spam" style="width: 50%;"></div>
+                                <div class="bar-fill bar-ham" id="bar-ham" style="width: 50%;"></div>
+                            </div>
+                            <div class="prob-legend">
+                                <div class="legend-item legend-spam">
+                                    <span class="legend-dot"></span>
+                                    <span class="legend-name">Spam Risk</span>
+                                    <strong class="legend-val" id="val-spam-prob">0%</strong>
+                                </div>
+                                <div class="legend-item legend-ham">
+                                    <span class="legend-dot"></span>
+                                    <span class="legend-name">Legitimate (Ham)</span>
+                                    <strong class="legend-val" id="val-ham-prob">0%</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Extracted Risk Keywords -->
+                        <div class="analysis-box">
+                            <div class="box-title">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                                    <line x1="7" y1="7" x2="7.01" y2="7"/>
+                                </svg>
+                                <span>Key Signals & TF-IDF Features</span>
+                            </div>
+                            <div class="keywords-list" id="keywords-container">
+                                <!-- Dynamic keyword tags -->
+                            </div>
+                        </div>
+
+                        <!-- Content Diagnostics -->
+                        <div class="diagnostics-grid">
+                            <div class="diag-card">
+                                <span class="diag-label">Uppercase Ratio</span>
+                                <span class="diag-value" id="diag-uppercase">0%</span>
+                            </div>
+                            <div class="diag-card">
+                                <span class="diag-label">Suspicious Symbols</span>
+                                <span class="diag-value" id="diag-symbols">None</span>
+                            </div>
+                            <div class="diag-card">
+                                <span class="diag-label">Word Count</span>
+                                <span class="diag-value" id="diag-words">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <section class="history-section">
+                <div class="history-header">
+                    <div class="history-title-wrap">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <h2 class="history-title">Session Scan History</h2>
+                    </div>
+                    <button type="button" class="btn-ghost btn-xs" id="btn-clear-history">Clear History</button>
+                </div>
+                
+                <div class="history-table-wrapper">
+                    <table class="history-table" id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Email Snippet</th>
+                                <th>Verdict</th>
+                                <th>Confidence</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-tbody">
+                            <tr class="history-empty">
+                                <td colspan="5">No emails analyzed yet in this session.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AI Spam Email Detector • Powered by Scikit-Learn TF-IDF & Multinomial Naive Bayes</p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
